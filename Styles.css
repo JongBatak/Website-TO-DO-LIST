@@ -1,89 +1,94 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+/* Reset some default styles */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    list-style-type: none;
 }
 
+/* Set default font for body */
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+/* Header styles */
 header {
+    width: 100%;
     background-color: #333;
     color: #fff;
-    padding: 10px;
+    padding: 10px 0;
     text-align: center;
 }
 
-header nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+/* Navbar styles */
+.navbar {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 10px;
 }
 
-header nav li {
-    margin-right: 20px;
+.navbar-nav {
+    list-style-type: none;
+    display: flex;
+    gap: 15px;
 }
 
-header nav a {
+.nav-item a {
     color: #fff;
     text-decoration: none;
-}
-
-.board-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.list-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.list {
-    background-color: #fff;
-    padding: 10px;
-    margin: 10px;
-    width: 250px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.list h3 {
-    margin-top: 0;
-}
-
-.card-container {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.card {
-    background-color: #fff;
-    padding: 10px;
-    margin: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.card p {
-    margin-bottom: 10px;
-}
-
-.delete-card {
-    background-color: #ff0000;
-    color: #fff;
-    border: none;
     padding: 5px 10px;
-    font-size: 12px;
-    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.add-card {
-    background-color: #4CAF50;
+.nav-item a:hover {
+    background-color: #575757;
+    border-radius: 5px;
+}
+
+/* Main content styles */
+main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Footer styles */
+footer {
+    width: 100%;
+    background-color: #333;
     color: #fff;
-    border: none;
-    padding: 5px 10
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+}
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 4cm;
+    
+}
+
+.nav li {
+    background-color: purple;
+    width: 10vh;
+    height:4vh ;
+    border-radius: 20px;
+}
+
+.nav li a {
+    color: white;
+    text-decoration: none;
 }
