@@ -1,27 +1,21 @@
-// Store references to frequently accessed elements
 const listContainer = document.querySelector('.list-container');
 const addListButton = document.querySelector('.add-list');
 const modeToggle = document.getElementById('modeToggle');
 
-// Initialize drag variables
 let draggedCard = null;
 
-// Event Listeners
 document.addEventListener('DOMContentLoaded', loadData);
 window.addEventListener('unload', storeData);
 modeToggle.addEventListener('change', toggleDarkMode);
 addListButton.addEventListener('click', addList);
 
-// Add event listeners to existing cards and buttons
 initializeExistingElements();
 
 function initializeExistingElements() {
-    // Add event listeners to existing delete buttons
     document.querySelectorAll('.delete-card').forEach(button => {
         button.addEventListener('click', () => deleteCard(button.parentElement));
     });
 
-    // Add event listeners to existing add card buttons
     document.querySelectorAll('.add-card').forEach(button => {
         button.addEventListener('click', () => {
             const input = button.previousElementSibling;
@@ -32,7 +26,6 @@ function initializeExistingElements() {
         });
     });
 
-    // Add drag events to existing cards
     document.querySelectorAll('.card').forEach(card => {
         addDragEvents(card);
     });
@@ -147,16 +140,16 @@ function loadData() {
     if (savedData) {
         const data = JSON.parse(savedData);
         
-        // Clear existing lists
+ 
         listContainer.innerHTML = '';
 
-        // Restore dark mode
+
         if (data.darkMode) {
             document.body.classList.add('dark-mode');
             modeToggle.checked = true;
         }
 
-        // Restore lists and cards
+
         data.lists.forEach(listData => {
             const newList = document.createElement('li');
             newList.className = 'list';
