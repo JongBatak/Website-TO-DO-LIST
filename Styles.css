@@ -1,94 +1,531 @@
-/* Reset some default styles */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
+/* Base styles */
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    list-style-type: none;
-}
-
-/* Set default font for body */
-body {
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f4f4f4;
-}
-
-/* Header styles */
-header {
-    width: 100%;
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;
-}
-
-/* Navbar styles */
-.navbar {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
+    min-height: 100vh;
 }
 
-.navbar-nav {
+/* Sidebar styles */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 20px;
+    transition: all 0.3s ease;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.sidebar.closed {
+    transform: translateX(-250px);
+}
+
+.sidebar h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #3498db;
+}
+
+.sidebar h3 {
+    color: #3498db;
+    margin: 15px 0 10px 0;
+    font-size: 18px;
+}
+
+.sidebar ul {
     list-style-type: none;
-    display: flex;
-    gap: 15px;
+    padding: 0;
+    margin: 0;
 }
 
-.nav-item a {
-    color: #fff;
+.sidebar ul ul {
+    padding-left: 15px;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    color: #ecf0f1;
     text-decoration: none;
-    padding: 5px 10px;
-    transition: background-color 0.3s ease;
+    font-size: 16px;
+    transition: color 0.3s ease;
+    display: block;
+    padding: 5px 0;
 }
 
-.nav-item a:hover {
-    background-color: #575757;
-    border-radius: 5px;
+.sidebar ul li a:hover {
+    color: #3498db;
+}
+
+
+#toggleSidebar:hover {
+    background-color: #34495e;
 }
 
 /* Main content styles */
 main {
-    max-width: 1200px;
-    margin: 20px auto;
+    flex-grow: 1;
     padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    margin-left: 250px;
+    transition: margin-left 0.3s ease;
 }
 
-/* Footer styles */
-footer {
-    width: 100%;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
+main.full-width {
+    margin-left: 0;
+}
+
+header {
+    background-color: #3498db;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
 }
 
 .nav {
+    list-style: none;
     display: flex;
-    flex-direction: row;
     justify-content: center;
-    align-items: center;
-    gap: 4cm;
-    
+    gap: 20px;
+    margin: 0;
+    padding: 0;
 }
 
-.nav li {
-    background-color: purple;
-    width: 10vh;
-    height:4vh ;
-    border-radius: 20px;
-}
-
-.nav li a {
+.nav a {
     color: white;
     text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.nav a:hover {
+    color: #2c3e50;
+}
+
+/* Board and List styles */
+.board-container {
+    padding: 20px;
+}
+
+.list-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+}
+
+.list {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.list:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.list h3 {
+    margin-top: 0;
+    color: #2c3e50;
+    font-size: 20px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+/* Card styles */
+.card-container {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.card {
+    background-color: #ecf0f1;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateX(5px);
+}
+
+.card p {
+    margin: 0 0 10px 0;
+    color: #34495e;
+}
+
+/* Button styles */
+.delete-card,
+.add-card,
+.add-list {
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.delete-card {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.delete-card:hover {
+    background-color: #c0392b;
+}
+
+.add-card {
+    background-color: #2ecc71;
+    color: #fff;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.add-card:hover {
+    background-color: #27ae60;
+}
+
+.add-list {
+    background-color: #9b59b6;
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+.add-list:hover {
+    background-color: #8e44ad;
+}
+
+/* Input styles */
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+/* Mode toggle styles */
+.mode-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin: 0 10px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+}
+
+body.dark-mode .sidebar {
+    background-color: #34495e;
+}
+
+body.dark-mode .list {
+    background-color: #34495e;
+    border-color: #2c3e50;
+}
+
+/* ... (keep all the previous CSS code up to the dark mode styles, then replace the dark mode section with this) ... */
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #2c3e50;
+    color: #ffffff;
+}
+
+body.dark-mode .sidebar {
+    background-color: #34495e;
+}
+
+body.dark-mode .list {
+    background-color: #34495e;
+    border-color: #2c3e50;
+}
+
+body.dark-mode .list h3 {
+    color: #ffffff;
+    border-bottom-color: #3498db;
+}
+
+body.dark-mode .card {
+    background-color: #2c3e50;
+    border: 1px solid #456789;
+}
+
+body.dark-mode .card p {
+    color: #ffffff;
+}
+
+body.dark-mode input[type="text"] {
+    background-color: #2c3e50;
+    color: #ffffff;
+    border-color: #456789;
+}
+
+body.dark-mode input[type="text"]::placeholder {
+    color: #95a5a6;
+}
+
+body.dark-mode .delete-card {
+    background-color: #0000ff;
+    color: #ffffff;
+}
+
+body.dark-mode .delete-card:hover {
+    background-color: #0000cc;
+}
+
+body.dark-mode .add-card {
+    background-color: #27ae60;
+    color: #ffffff;
+}
+
+body.dark-mode .add-card:hover {
+    background-color: #219a52;
+}
+
+body.dark-mode .add-list {
+    background-color: #8e44ad;
+    color: #ffffff;
+}
+
+body.dark-mode .add-list:hover {
+    background-color: #763a8e;
+}
+
+body.dark-mode header {
+    background-color: #34495e;
+}
+
+body.dark-mode .nav a {
+    color: #ffffff;
+}
+
+body.dark-mode .nav a:hover {
+    color: #3498db;
+}
+
+body.dark-mode #toggleSidebar {
+    background-color: #34495e;
+    color: #ffffff;
+}
+
+body.dark-mode #toggleSidebar:hover {
+    background-color: #2c3e50;
+}
+
+body.dark-mode .sidebar h2,
+body.dark-mode .sidebar h3 {
+    color: #3498db;
+}
+
+body.dark-mode .sidebar ul li a {
+    color: #ffffff;
+}
+
+body.dark-mode .sidebar ul li a:hover {
+    color: #3498db;
+}
+
+body.dark-mode .mode-toggle span {
+    color: #ffffff;
+}
+
+/* Drag and Drop styles for dark mode */
+body.dark-mode .card.dragging {
+    opacity: 0.5;
+    background-color: #34495e;
+}
+
+body.dark-mode .list.drag-over {
+    border: 2px dashed #3498db;
+}
+
+/* Additional dark mode hover effects */
+body.dark-mode .card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .list:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Mode toggle specific styles */
+body.dark-mode .switch {
+    background-color: #34495e;
+}
+
+body.dark-mode .slider {
+    background-color: #2c3e50;
+}
+
+body.dark-mode .slider:before {
+    background-color: #ffffff;
+}
+
+body.dark-mode input:checked + .slider {
+    background-color: #3498db;
+}
+
+/* Scrollbar styles for dark mode */
+body.dark-mode ::-webkit-scrollbar {
+    width: 10px;
+}
+
+body.dark-mode ::-webkit-scrollbar-track {
+    background: #2c3e50;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+    background: #34495e;
+    border-radius: 5px;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: #3498db;
+}
+
+/* Focus styles for dark mode */
+body.dark-mode input[type="text"]:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+/* Error state styles for dark mode */
+body.dark-mode .error {
+    color: #e74c3c;
+    background-color: rgba(231, 76, 60, 0.1);
+    border: 1px solid #e74c3c;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+/* Update header styles */
+header {
+    background-color: #3498db;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mode-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 20px;
+}
+
+/* Sidebar submenu styles */
+.submenu {
+    display: none;
+    padding-left: 15px !important;
+    margin-top: 5px;
+}
+
+.submenu.active {
+    display: block;
+}
+
+.menu-item {
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.menu-item:hover {
+    color: #3498db;
+}
+
+.submenu li {
+    margin: 5px 0;
+}
+
+.submenu a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+    padding: 3px 0;
+    display: block;
+}
+
+.submenu a:hover {
+    color: #3498db;
 }
