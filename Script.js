@@ -1,36 +1,52 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const taskInput = document.getElementById("taskInput");
-    const addTaskBtn = document.getElementById("addTaskBtn");
-    const taskList = document.getElementById("taskList");
+function addCard(event) {
+    const inputField = event.target.previousElementSibling; 
+    const cardText = inputField.value.trim(); 
 
-    addTaskBtn.addEventListener("click", () => {
-        const taskText = taskInput.value.trim();
-        if (taskText) {
-            addTask(taskText);
-            taskInput.value = ""; // Clear input
-        }
-    });
+    if (cardText === '') {
+        alert('Please enter a card description!');
+        return;
+    }
 
-    function addTask(taskText) {
-        const li = document.createElement("li");
-        li.textContent = taskText;
+    const cardList = event.target.parentElement.querySelector('.card-container'); 
+    const newCard = document.createElement('li'); 
+    newCard.className = 'card'; 
+    newCard.innerHTML = `
+        <p>${cardText}</p>
+        <button class="delete-card">Delete</button>
+    `; 
 
-        // Buat Check Box nya
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.addEventListener("change", () => {
-            li.classList.toggle("completed");
-        });
+    cardList.appendChild(newCard);
+    inputField.value = ''; 
+}
 
-        // Buat tombol delete
-        const deleteBtn = document.createElement("button");
-        deleteBtn.textContent = "Delete";
-        deleteBtn.addEventListener("click", () => {
-            taskList.removeChild(li);
-        });
+function deleteCard(event) {
+    const card = event.target.parentElement; 
+    card.remove(); 
+}
 
-        li.prepend(checkbox);
-        li.appendChild(deleteBtn);
-        taskList.appendChild(li);
+document.querySelectorAll('.add-card').forEach(button => {
+    button.addEventListener('click', addCard); 
+});
+
+document.addEventListener('click', (event) => {
+    if (event.target.classList.contains('delete-card')) {
+        deleteCard(event); 
     }
 });
+
+function addList() {
+    const newList = document.createElement('li'); 
+    newList.className = 'list'; 
+    newList.innerHTML = `
+        <h3>New List</h3>
+        <ul class="card-container"></ul>
+        <input type="text" placeholder="Add a new card...">
+        <button class="add-card">Add Card</button>
+    `; 
+
+    document.querySelector('.list-container').appendChild(newList);
+   
+    newList.querySelector('.add-card').addEventListener('click', addCard);
+}
+
+document.querySelector('.add-list').addEventListener('click', addList);
