@@ -2,13 +2,74 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <script>Script.js</script>
-    <link rel="stylesheet" href="Styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website TO-DO LISt</title>
+    <title>Website TO-DO LIST</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Boards</a></li>
+                <li><a href="#">Lists</a></li>
+                <li><a href="#">Cards</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="board-container">
+            <h2>My Board</h2>
+            <ul class="list-container">
+                <li class="list">
+                    <h3>To-Do</h3>
+                    <ul class="card-container">
+                        <li class="card">
+                            <p>Task 1</p>
+                            <button class="delete-card">Delete</button>
+                        </li>
+                        <li class="card">
+                            <p>Task 2</p>
+                            <button class="delete-card">Delete</button>
+                        </li>
+                        <li class="card">
+                            <p>Task 3</p>
+                            <button class="delete-card">Delete</button>
+                        </li>
+                    </ul>
+                    <input type="text" placeholder="Add a new card...">
+                    <button class="add-card">Add Card</button>
+                </li>
+                <li class="list">
+                    <h3>In Progress</h3>
+                    <ul class="card-container">
+                        <li class="card">
+                            <p>Task 4</p>
+                            <button class="delete-card">Delete</button>
+                        </li>
+                        <li class="card">
+                            <p>Task 5</p>
+                            <button class="delete-card">Delete</button>
+                        </li>
+                    </ul>
+                    <input type="text" placeholder="Add a new card...">
+                    <button class="add-card">Add Card</button>
+                </li>
+                <li class="list">
+                    <h3>Done</h3>
+                    <ul class="card-container">
+                        <li class="card">
+                            <p>Task 6</p>
+                            <button class="delete-card">Delete</button>
+                        </li>
+                    </ul>
+                    <input type="text" placeholder="Add a new card...">
+                    <button class="add-card">Add Card</button>
+                </li>
+            </ul>
+            <button class="add-list">Add List</button>
+        </section>
+    </main>
 
+    <script src="script.js"></script>
 </body>
 </html>
