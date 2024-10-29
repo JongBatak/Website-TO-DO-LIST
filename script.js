@@ -191,3 +191,125 @@ function loadData() {
         });
     }
 }
+
+function addList() {
+    const listName = prompt("Enter the name for the new list:");
+    if (listName === null) return; // User canceled the prompt
+    if (listName.trim() === "") {
+        alert("List name cannot be empty!");
+        return;
+    }
+
+    const newList = document.createElement('li');
+    newList.className = 'list';
+    newList.setAttribute('ondragover', 'allowDrop(event)');
+    newList.setAttribute('ondrop', 'drop(event)');
+    
+    newList.innerHTML = `
+        <h3>
+            <span class="list-title">${listName}</span>
+            <button class="edit-list-title">Edit</button>
+        </h3>
+        <ul class="card-container"></ul>
+        <input type="text" placeholder="Add a new card...">
+        <button class="add-card">Add Card</button>
+        <button class="delete-list">Delete List</button>
+    `;
+
+    const addCardButton = newList.querySelector('.add-card');
+    const input = newList.querySelector('input');
+    const deleteListButton = newList.querySelector('.delete-list');
+    const editListTitleButton = newList.querySelector('.edit-list-title');
+
+    addCardButton.addEventListener('click', () => addCard(newList));
+    deleteListButton.addEventListener('click', () => deleteList(newList));
+    editListTitleButton.addEventListener('click', () => editListTitle(newList));
+
+    listContainer.appendChild(newList);
+    storeData();
+}
+
+function addCard(list) {
+    const input = list.querySelector('input');
+    const text = input.value.trim();
+    if (text === "") {
+        alert("Card text cannot be empty!");
+        return;
+    }
+
+    const cardContainer = list.querySelector('.card-container');
+    const newCard = document.createElement('li');
+    newCard.className = 'card';
+    newCard.draggable = true;
+    newCard.innerHTML = `
+        <p>${text}</p>
+        <button class="edit-card">Edit</button>
+        <button class="delete-card">Delete</button>
+    `;
+
+    addDragEvents(newCard);
+    newCard.querySelector('.delete-card').addEventListener('click', () => deleteCard(newCard));
+    newCard.querySelector('.edit-card').addEventListener('click', () => editCard(newCard));
+    
+    cardContainer.appendChild(newCard);
+    input.value = '';
+    storeData();
+}
+
+function editListTitle(list) {
+    const titleSpan = list.querySelector('.list-title');
+    const newTitle = prompt("Enter new list title:", titleSpan.textContent);
+    if (newTitle === null) return; // User canceled the prompt
+    if (newTitle.trim() === "") {
+        alert("List title cannot be empty!");
+        return;
+    }
+    titleSpan.textContent = newTitle;
+    storeData();
+}
+
+function editCard(card) {
+    const paragraph = card.querySelector('p');
+    const newText = prompt("Enter new card text:", paragraph.textContent);
+    if (newText === null) return; // User canceled the prompt
+    if (newText.trim() === "") {
+        alert("Card text cannot be empty!");
+        return;
+    }
+    paragraph.textContent = newText;
+    storeData();
+}
+
+function deleteList(list) {
+    if (confirm("Are you sure you want to delete this list?")) {
+        list.remove();
+        storeData();
+    }
+}
+
+function initializeExistingElements() {
+    document.querySelectorAll('.delete-card').forEach(button => {
+        button.addEventListener('click', () => deleteCard(button.closest('.card')));
+    });
+
+    document.querySelectorAll('.edit-card').forEach(button => {
+        button.addEventListener('click', () => editCard(button.closest('.card')));
+    });
+
+    document.querySelectorAll('.add-card').forEach(button => {
+        button.addEventListener('click', () => addCard(button.closest('.list')));
+    });
+
+    document.querySelectorAll('.edit-list-title').forEach(button => {
+        button.addEventListener('click', () => editListTitle(button.closest('.list')));
+    });
+
+    document.querySelectorAll('.delete-list').forEach(button => {
+        button.addEventListener('click', () => deleteList(button.closest('.list')));
+    });
+
+    document.querySelectorAll('.card').forEach(card => {
+        addDragEvents(card);
+    });
+}
+
