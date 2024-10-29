@@ -50,7 +50,14 @@
             <h2>My Board</h2>
             <ul class="list-container">
                 <li class="list" ondragover="allowDrop(event)" ondrop="drop(event)">
-                    <h3>To-Do</h3>
+                    <h3>
+                        <span class="list-title">To-Do</To-Do></span>
+                    
+                    </h3>
+                    
+                    <button class="delete-list">Delete List</button>
+                    <button class="edit-list-title">Edit</button>
+                </li>
                     <ul class="card-container">
                         <li class="card" draggable="true">
                             <p>Task 1</p>
@@ -69,7 +76,12 @@
                     <button class="add-card">Add Card</button>
                 </li>
                 <li class="list" ondragover="allowDrop(event)" ondrop="drop(event)">
-                    <h3>In Progress</h3>
+                    <h3>
+                        <span class="list-title">In-Progress</span>
+                        <button class="edit-list-title">Edit</button>
+                    </h3>
+                    <button class="delete-list">Delete List</button>
+                </li>
                     <ul class="card-container">
                         <li class="card" draggable="true">
                             <p>Task 4</p>
@@ -87,8 +99,13 @@
                     <input type="text" placeholder="Add a new card...">
                     <button class="add-card">Add Card</button>
                 </li>
-                <li class="list"  ondragover="allowDrop(event)" ondrop="drop(event)">
-                    <h3>Done</h3>
+                <li class="list" ondragover="allowDrop(event)" ondrop="drop(event)">
+                    <h3>
+                        <span class="list-title">Done</span>
+                        <button class="edit-list-title">Edit</button>
+                    </h3>
+                    <button class="delete-list">Delete List</button>
+                </li>
                     <ul class="card-container">
                         <li class="card" draggable="true">
                             <p>Task 7</p>
