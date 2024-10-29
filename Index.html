@@ -10,28 +10,45 @@
     <header>
         <nav>
             <ul class="nav">
-                <li><a href="#">Boards</a></li>
-                <li><a href="#">Lists</a></li>
-                <li><a href="#">Cards</a></li>
+                <li><a href="#">Contacts</a></li>
+                <li><a href="#">@namegmail.com</a></li>
+                <li><a href="#">+62-123-456-7890</a></li>
             </ul>
         </nav>
     </header>
     <main>
+        <header>
+            <nav>
+                <ul class="nav">
+                    <li><a href="#">Boards</a></li>
+                    <li><a href="#">Lists</a></li>
+                    <li><a href="#">Cards</a></li>
+                </ul>
+                <div class="mode-toggle">
+                    <span>Light</span>
+                    <label class="switch">
+                        <input type="checkbox" id="modeToggle">
+                        <span class="slider round"></span>
+                    </label>
+                    <span>Dark</span>
+                </div>
+            </nav>
+        </header>
         <section class="board-container">
             <h2>My Board</h2>
             <ul class="list-container">
-                <li class="list">
+                <li class="list" ondragover="allowDrop(event)" ondrop="drop(event)">
                     <h3>To-Do</h3>
                     <ul class="card-container">
-                        <li class="card">
+                        <li class="card" draggable="true">
                             <p>Task 1</p>
                             <button class="delete-card">Delete</button>
                         </li>
-                        <li class="card">
+                        <li class="card" draggable="true">
                             <p>Task 2</p>
                             <button class="delete-card">Delete</button>
                         </li>
-                        <li class="card">
+                        <li class="card" draggable="true">
                             <p>Task 3</p>
                             <button class="delete-card">Delete</button>
                         </li>
@@ -39,26 +56,38 @@
                     <input type="text" placeholder="Add a new card...">
                     <button class="add-card">Add Card</button>
                 </li>
-                <li class="list">
+                <li class="list" ondragover="allowDrop(event)" ondrop="drop(event)">
                     <h3>In Progress</h3>
                     <ul class="card-container">
-                        <li class="card">
+                        <li class="card" draggable="true">
                             <p>Task 4</p>
                             <button class="delete-card">Delete</button>
                         </li>
-                        <li class="card">
+                        <li class="card" draggable="true">
                             <p>Task 5</p>
+                            <button class="delete-card">Delete</button>
+                        </li>
+                        <li class="card" draggable="true">
+                            <p>Task 6</p>
                             <button class="delete-card">Delete</button>
                         </li>
                     </ul>
                     <input type="text" placeholder="Add a new card...">
                     <button class="add-card">Add Card</button>
                 </li>
-                <li class="list">
+                <li class="list"  ondragover="allowDrop(event)" ondrop="drop(event)">
                     <h3>Done</h3>
                     <ul class="card-container">
-                        <li class="card">
-                            <p>Task 6</p>
+                        <li class="card" draggable="true">
+                            <p>Task 7</p>
+                            <button class="delete-card">Delete</button>
+                        </li>
+                        <li class="card" draggable="true">
+                            <p>Task 8</p>
+                            <button class="delete-card">Delete</button>
+                        </li>
+                        <li class="card" draggable="true">
+                            <p>Task 9</p>
                             <button class="delete-card">Delete</button>
                         </li>
                     </ul>
@@ -68,8 +97,38 @@
             </ul>
             <button class="add-list">Add List</button>
         </section>
+
+        
+        <div class="sidebar">
+            <h2>Menu</h2>
+            <ul>
+                <li>
+                    <h3 class="menu-item" data-type="boards">Boards</h3>
+                    <ul class="submenu boards-submenu">
+                        <li><a href="#">My Board</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <h3 class="menu-item" data-type="lists">Lists</h3>
+                    <ul class="submenu lists-submenu">
+                        <!-- Will be populated dynamically -->
+                    </ul>
+                </li>
+                <li>
+                    <h3 class="menu-item" data-type="cards">Cards</h3>
+                    <ul class="submenu cards-submenu">
+                        <!-- Will be populated dynamically -->
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <footer>
+            2021 &copy; Zwingli Savanarola Lubis
+        </footer>
+    
     </main>
 
     <script src="script.js"></script>
 </body>
 </html>
+
