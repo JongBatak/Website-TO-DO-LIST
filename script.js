@@ -541,25 +541,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const hasVisited = localStorage.getItem('hasVisitedBefore');
         
         if (!hasVisited) {
-            const forceReset = confirm("Reset All first for the best experience");
-            if (forceReset || !forceReset) {
-                resetAll();
-                localStorage.setItem('hasVisitedBefore', 'true');
-            }
-        } else {
-            // Check for edit button format issues after loading data
-            loadData();
-            if (checkEditButtonFormat()) {
-                // If there's an error, you might want to disable other functionality
-                // until the user resets
-                return;
-            }
+            // Simple alert without forcing any action
+            alert("If the website appears empty, please press the Reset All button to get started.");
+            localStorage.setItem('hasVisitedBefore', 'true');
         }
         
+        loadData();
         initializeExistingElements();
         document.getElementById('resetButton').addEventListener('click', resetAll);
     } catch (error) {
-        alert('An error occurred during initialization. Please press Reset All to fix the issue.');
         console.error('Error during initialization:', error);
     }
 });
