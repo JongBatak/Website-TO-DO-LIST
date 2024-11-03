@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Website TO-DO LIST</title>
-   <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
@@ -48,75 +48,85 @@
         </header>
         <section class="board-container">
             <h2>My Board</h2>
+            <button id="resetButton" class="reset-button">Reset All</button>
             <ul class="list-container">
+                <!-- To-Do List -->
                 <li class="list" ondragover="allowDrop(event)" ondrop="drop(event)">
                     <h3>
-                        <span class="list-title">To-Do</To-Do></span>
-                    
+                        <span class="list-title">To-Do</span>
+                        <button class="edit-list-title">Edit</button>
                     </h3>
-                    
                     <button class="delete-list">Delete List</button>
-                    <button class="edit-list-title">Edit</button>
-                </li>
                     <ul class="card-container">
                         <li class="card" draggable="true">
                             <p>Task 1</p>
+                            <button class="edit-card">Edit</button>
                             <button class="delete-card">Delete</button>
                         </li>
                         <li class="card" draggable="true">
                             <p>Task 2</p>
+                            <button class="edit-card">Edit</button>
                             <button class="delete-card">Delete</button>
                         </li>
                         <li class="card" draggable="true">
                             <p>Task 3</p>
+                            <button class="edit-card">Edit</button>
                             <button class="delete-card">Delete</button>
                         </li>
                     </ul>
                     <input type="text" placeholder="Add a new card...">
                     <button class="add-card">Add Card</button>
                 </li>
+
+                <!-- In-Progress List -->
                 <li class="list" ondragover="allowDrop(event)" ondrop="drop(event)">
                     <h3>
                         <span class="list-title">In-Progress</span>
                         <button class="edit-list-title">Edit</button>
                     </h3>
                     <button class="delete-list">Delete List</button>
-                </li>
                     <ul class="card-container">
                         <li class="card" draggable="true">
                             <p>Task 4</p>
+                            <button class="edit-card">Edit</button>
                             <button class="delete-card">Delete</button>
                         </li>
                         <li class="card" draggable="true">
                             <p>Task 5</p>
+                            <button class="edit-card">Edit</button>
                             <button class="delete-card">Delete</button>
                         </li>
                         <li class="card" draggable="true">
                             <p>Task 6</p>
+                            <button class="edit-card">Edit</button>
                             <button class="delete-card">Delete</button>
                         </li>
                     </ul>
                     <input type="text" placeholder="Add a new card...">
                     <button class="add-card">Add Card</button>
                 </li>
+
+                <!-- Done List -->
                 <li class="list" ondragover="allowDrop(event)" ondrop="drop(event)">
                     <h3>
                         <span class="list-title">Done</span>
                         <button class="edit-list-title">Edit</button>
                     </h3>
                     <button class="delete-list">Delete List</button>
-                </li>
                     <ul class="card-container">
                         <li class="card" draggable="true">
                             <p>Task 7</p>
+                            <button class="edit-card">Edit</button>
                             <button class="delete-card">Delete</button>
                         </li>
                         <li class="card" draggable="true">
                             <p>Task 8</p>
+                            <button class="edit-card">Edit</button>
                             <button class="delete-card">Delete</button>
                         </li>
                         <li class="card" draggable="true">
                             <p>Task 9</p>
+                            <button class="edit-card">Edit</button>
                             <button class="delete-card">Delete</button>
                         </li>
                     </ul>
@@ -127,15 +137,11 @@
             <button class="add-list">Add List</button>
         </section>
 
-        
-        
         <footer>
             2024 &copy; Zwingli Savanarola Lubis
         </footer>
-    
     </main>
 
     <script src="script.js"></script>
 </body>
 </html>
-
