@@ -313,3 +313,14 @@ function initializeExistingElements() {
     });
 }
 
+document.getElementById('resetButton').addEventListener('click', function() {
+    if (confirm('Are you sure you want to reset everything? This action cannot be undone.')) {
+        // Reset all lists to their default state
+        const listContainer = document.querySelector('.list-container');
+        listContainer.innerHTML = ''; // Clear all lists
+        
+        // Optionally, reload the page to restore default state
+        location.reload();
+    }
+});
+
