@@ -769,3 +769,27 @@ body.dark-mode .modal-content button {
 body.dark-mode .modal-content button:hover {
     background-color: #2980b9;
 }
+
+.edit-card {
+    background-color: #3498db; /* Blue color, you can change this */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px; /* This gives smooth edges */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-card:hover {
+    background-color: #2980b9; /* Darker blue for hover effect */
+}
+
+/* For dark mode */
+body.dark-mode .edit-card {
+    background-color: #2ecc71; /* Green color for dark mode */
+    color: #2c3e50;
+}
+
+body.dark-mode .edit-card:hover {
+    background-color: #27ae60; /* Darker green for hover in dark mode */
+}
