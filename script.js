@@ -31,6 +31,7 @@ function initializeExistingElements() {
     });
 }
 
+
 function addDragEvents(card) {
     card.addEventListener('dragstart', (e) => {
         draggedCard = card;
@@ -122,7 +123,7 @@ function storeData() {
             });
         });
         lists.push({
-            title: list.querySelector('h3').textContent,
+            title: list.querySelector('.list-title').textContent,
             cards: cards
         });
     });
@@ -133,63 +134,6 @@ function storeData() {
     };
 
     localStorage.setItem('todoListData', JSON.stringify(data));
-}
-
-function loadData() {
-    const savedData = localStorage.getItem('todoListData');
-    if (savedData) {
-        const data = JSON.parse(savedData);
-        
- 
-        listContainer.innerHTML = '';
-
-
-        if (data.darkMode) {
-            document.body.classList.add('dark-mode');
-            modeToggle.checked = true;
-        }
-
-
-        data.lists.forEach(listData => {
-            const newList = document.createElement('li');
-            newList.className = 'list';
-            newList.setAttribute('ondragover', 'allowDrop(event)');
-            newList.setAttribute('ondrop', 'drop(event)');
-            
-            newList.innerHTML = `
-                <h3>${listData.title}</h3>
-                <ul class="card-container"></ul>
-                <input type="text" placeholder="Add a new card...">
-                <button class="add-card">Add Card</button>
-            `;
-
-            const cardContainer = newList.querySelector('.card-container');
-            listData.cards.forEach(cardData => {
-                const card = document.createElement('li');
-                card.className = 'card';
-                card.draggable = true;
-                card.innerHTML = `
-                    <p>${cardData.text}</p>
-                    <button class="delete-card">Delete</button>
-                `;
-                addDragEvents(card);
-                card.querySelector('.delete-card').addEventListener('click', () => deleteCard(card));
-                cardContainer.appendChild(card);
-            });
-
-            const addCardButton = newList.querySelector('.add-card');
-            const input = newList.querySelector('input');
-
-            addCardButton.addEventListener('click', () => {
-                if (input.value.trim()) {
-                    addCard(newList, input.value);
-                    input.value = '';
-                }
-            });
-
-            listContainer.appendChild(newList);
-        });
-    }
 }
 
 function addList() {
@@ -444,26 +388,7 @@ function resetAll() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Check if it's the first visit
-    const hasVisited = localStorage.getItem('hasVisitedBefore');
-    
-    if (!hasVisited) {
-        // Show custom alert that forces reset
-        const forceReset = confirm("Reset All first for the best experience");
-        if (forceReset || !forceReset) { // This ensures reset happens regardless of user choice
-            resetAll();
-            // Mark that the user has visited
-            localStorage.setItem('hasVisitedBefore', 'true');
-        }
-    }
-    
-    loadData();
-    initializeExistingElements();
 
-    // Add event listener for the Reset All button
-    document.getElementById('resetButton').addEventListener('click', resetAll);
-});
 
 function resetAll() {
     const listContainer = document.querySelector('.list-container');
@@ -555,31 +480,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Also add the check to the loadData function
-function loadData() {
-    try {
-        const savedData = localStorage.getItem('todoListData');
-        if (savedData) {
-            const data = JSON.parse(savedData);
-            
-            listContainer.innerHTML = '';
-
-            if (data.darkMode) {
-                document.body.classList.add('dark-mode');
-                modeToggle.checked = true;
-            }
-
-            data.lists.forEach(listData => {
-                // ... existing list loading code ...
-            });
-
-            // Check edit button format after loading data
-            checkEditButtonFormat();
-        }
-    } catch (error) {
-        alert('An error occurred while loading data. Please press Reset All to fix the issue.');
-        console.error('Error loading data:', error);
-    }
-}
 
 // Make sure your resetAll function creates the correct button format
 function resetAll() {
@@ -648,71 +548,9 @@ function checkEmptyWebsite() {
     return false;
 }
 
-// Modify your DOMContentLoaded event listener
-document.addEventListener('DOMContentLoaded', function() {
-    try {
-        // Clear the session flag when the page is first loaded
-        sessionStorage.removeItem('emptyAlertShown');
-        
-        const hasVisited = localStorage.getItem('hasVisitedBefore');
-        
-        if (!hasVisited) {
-            const forceReset = confirm("Reset All first for the best experience");
-            if (forceReset || !forceReset) {
-                resetAll();
-                localStorage.setItem('hasVisitedBefore', 'true');
-            }
-        } else {
-            loadData();
-            if (checkEditButtonFormat()) {
-                return;
-            }
-            // Check for empty website after loading data
-            checkEmptyWebsite();
-        }
-        
-        initializeExistingElements();
-        document.getElementById('resetButton').addEventListener('click', resetAll);
-    } catch (error) {
-        alert('An error occurred during initialization. Please press Reset All to fix the issue.');
-        console.error('Error during initialization:', error);
-    }
-});
+
 
 // Modify loadData function
-function loadData() {
-    try {
-        const savedData = localStorage.getItem('todoListData');
-        if (savedData) {
-            const data = JSON.parse(savedData);
-            
-            listContainer.innerHTML = '';
-
-            if (data.darkMode) {
-                document.body.classList.add('dark-mode');
-                modeToggle.checked = true;
-            }
-
-            data.lists.forEach(listData => {
-                // ... existing list loading code ...
-            });
-
-            checkEditButtonFormat();
-            // Only check for empty website once during initial load
-            if (!sessionStorage.getItem('emptyAlertShown')) {
-                checkEmptyWebsite();
-            }
-        } else {
-            // Only check for empty website once during initial load
-            if (!sessionStorage.getItem('emptyAlertShown')) {
-                checkEmptyWebsite();
-            }
-        }
-    } catch (error) {
-        alert('An error occurred while loading data. Please press Reset All to fix the issue.');
-        console.error('Error loading data:', error);
-    }
-}
 
 // Remove the empty website check from these functions since we only want it on initial load
 function deleteList(list) {
@@ -722,30 +560,326 @@ function deleteList(list) {
     }
 }
 
-function storeData() {
-    try {
-        const lists = [];
-        document.querySelectorAll('.list').forEach(list => {
-            const cards = [];
-            list.querySelectorAll('.card').forEach(card => {
-                cards.push({
-                    text: card.querySelector('p').textContent
-                });
+
+
+
+function loadData() {
+    const savedData = localStorage.getItem('todoListData');
+    if (savedData) {
+        const data = JSON.parse(savedData);
+        
+        listContainer.innerHTML = ''; // Clear existing lists
+
+        if (data.darkMode) {
+            document.body.classList.add('dark-mode');
+            modeToggle.checked = true;
+        }
+
+        data.lists.forEach(listData => {
+            const newList = document.createElement('li');
+            newList.className = 'list';
+            newList.setAttribute('ondragover', 'allowDrop(event)');
+            newList.setAttribute('ondrop', 'drop(event)');
+            
+            // Create list header
+            const listHeader = document.createElement('div');
+            listHeader.className = 'list-header';
+
+            const listTitle = document.createElement('h3');
+            listTitle.className = 'list-title';
+            listTitle.textContent = listData.title;
+
+            const editButton = document.createElement('button');
+            editButton.className = 'edit-list-title';
+            editButton.textContent = 'Edit';
+            editButton.addEventListener('click', () => editListTitle(newList));
+
+            listHeader.appendChild(listTitle);
+            listHeader.appendChild(editButton);
+
+            // Create delete list button
+            const deleteListButton = document.createElement('button');
+            deleteListButton.className = 'delete-list';
+            deleteListButton.textContent = 'Delete List';
+            deleteListButton.addEventListener('click', () => deleteList(newList));
+
+            // Create card container
+            const cardContainer = document.createElement('ul');
+            cardContainer.className = 'card-container';
+
+            // Create input for new cards
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.placeholder = 'Add a new card...';
+
+            // Create add card button
+            const addCardButton = document.createElement('button');
+            addCardButton.className = 'add-card';
+            addCardButton.textContent = 'Add Card';
+            addCardButton.addEventListener('click', () => addCard(newList));
+
+            // Append all elements to the list
+            newList.appendChild(listHeader);
+            newList.appendChild(deleteListButton);
+            newList.appendChild(cardContainer);
+            newList.appendChild(input);
+            newList.appendChild(addCardButton);
+
+            // Create cards
+            listData.cards.forEach(cardData => {
+                const card = createCardElement(cardData.text);
+                cardContainer.appendChild(card);
             });
-            lists.push({
-                title: list.querySelector('h3').textContent,
-                cards: cards
-            });
+
+            listContainer.appendChild(newList);
         });
 
-        const data = {
-            lists: lists,
-            darkMode: document.body.classList.contains('dark-mode')
-        };
-
-        localStorage.setItem('todoListData', JSON.stringify(data));
-    } catch (error) {
-        alert('An error occurred while saving data. Please press Reset All to fix the issue.');
-        console.error('Error saving data:', error);
+        // Re-initialize event listeners for all buttons
+        initializeExistingElements(); 
     }
+}
+
+function createCardElement(text) {
+    const card = document.createElement('li');
+    card.className = 'card';
+    card.draggable = true;
+
+    const cardText = document.createElement('p');
+    cardText.textContent = text;
+
+    const editButton = document.createElement('button');
+    editButton.className = 'edit-card';
+    editButton.textContent = 'Edit';
+    editButton.addEventListener('click', () => editCard(card));
+
+    const deleteButton = document.createElement('button');
+    deleteButton.className = 'delete-card';
+    deleteButton.textContent = 'Delete';
+    deleteButton.addEventListener('click', () => deleteCard(card));
+
+    card.appendChild(cardText);
+    card.appendChild(editButton);
+    card.appendChild(deleteButton);
+
+    addDragEvents(card);
+
+    return card;
+}
+
+function addList() {
+    const listName = prompt("Enter the name for the new list:");
+    if (listName === null) return; // User canceled the prompt
+    if (listName.trim() === "") {
+        alert("List name cannot be empty!");
+        return;
+    }
+
+    const newList = document.createElement('li');
+    newList.className = 'list';
+    newList.setAttribute('ondragover', 'allowDrop(event)');
+    newList.setAttribute('ondrop', 'drop(event)');
+    
+    // Create list header
+    const listHeader = document.createElement('div');
+    listHeader.className = 'list-header';
+
+    const listTitle = document.createElement('h3');
+    listTitle.className = ' list-title';
+    listTitle.textContent = listName;
+
+    const editButton = document.createElement('button');
+    editButton.className = 'edit-list-title';
+    editButton.textContent = 'Edit';
+    editButton.addEventListener('click', () => editListTitle(newList));
+
+    listHeader.appendChild(listTitle);
+    listHeader.appendChild(editButton);
+
+    // Create delete list button
+    const deleteListButton = document.createElement('button');
+    deleteListButton.className = 'delete-list';
+    deleteListButton.textContent = 'Delete List';
+    deleteListButton.addEventListener('click', () => deleteList(newList));
+
+    // Create card container
+    const cardContainer = document.createElement('ul');
+    cardContainer.className = 'card-container';
+
+    // Create input for new cards
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.placeholder = 'Add a new card...';
+
+    // Create add card button
+    const addCardButton = document.createElement('button');
+    addCardButton.className = 'add-card';
+    addCardButton.textContent = 'Add Card';
+    addCardButton.addEventListener('click', () => addCard(newList));
+
+    // Append all elements to the list
+    newList.appendChild(listHeader);
+    newList.appendChild(deleteListButton);
+    newList.appendChild(cardContainer);
+    newList.appendChild(input);
+    newList.appendChild(addCardButton);
+
+    listContainer.appendChild(newList);
+    initializeExistingElements();
+    storeData();
+}
+
+function createCardElement(text) {
+    const card = document.createElement('li');
+    card.className = 'card';
+    card.draggable = true;
+
+    const cardText = document.createElement('p');
+    cardText.textContent = text;
+
+    const editButton = document.createElement('button');
+    editButton.className = 'edit-card';
+    editButton.textContent = 'Edit';
+
+    const deleteButton = document.createElement('button');
+    deleteButton.className = 'delete-card';
+    deleteButton.textContent = 'Delete';
+
+    card.appendChild(cardText);
+    card.appendChild(editButton);
+    card.appendChild(deleteButton);
+
+    addDragEvents(card);
+
+    return card;
+}
+
+function initializeExistingElements() {
+    // Delete card buttons
+    document.querySelectorAll('.delete-card').forEach(button => {
+        button.addEventListener('click', () => deleteCard(button.closest('.card')));
+    });
+
+    // Edit card buttons
+    document.querySelectorAll('.edit-card').forEach(button => {
+        button.addEventListener('click', () => editCard(button.closest('.card')));
+    });
+
+    // Add card buttons
+    document.querySelectorAll('.add-card').forEach(button => {
+        button.addEventListener('click', () => addCard(button.closest('.list')));
+    });
+
+    // Edit list title buttons
+    document.querySelectorAll('.edit-list-title').forEach(button => {
+        button.addEventListener('click', () => editListTitle(button.closest('.list')));
+    });
+
+    // Delete list buttons
+    document.querySelectorAll('.delete-list').forEach(button => {
+        button.addEventListener('click', () => deleteList(button.closest('.list')));
+    });
+
+    // Drag events for cards
+    document.querySelectorAll('.card').forEach(card => {
+        addDragEvents(card);
+    });
+}
+
+function addList() {
+    const listName = prompt("Enter the name for the new list:");
+    if (listName === null) return; // User canceled the prompt
+    if (listName.trim() === "") {
+        alert("List name cannot be empty!");
+        return;
+    }
+
+    const newList = document.createElement('li');
+    newList.className = 'list';
+    newList.setAttribute('ondragover', 'allowDrop(event)');
+    newList.setAttribute('ondrop', 'drop(event)');
+    
+    // Create list header
+    const listHeader = document.createElement('div');
+    listHeader.className = 'list-header';
+
+    const listTitle = document.createElement('h3');
+    listTitle.className = 'list-title';
+    listTitle.textContent = listName;
+
+    const editButton = document.createElement('button');
+    editButton.className = 'edit-list-title';
+    editButton.textContent = 'Edit';
+
+    listHeader.appendChild(listTitle);
+    listHeader.appendChild(editButton);
+
+    // Create delete list button
+    const deleteListButton = document.createElement('button');
+    deleteListButton.className = 'delete-list';
+    deleteListButton.textContent = 'Delete List';
+
+    // Create card container
+    const cardContainer = document.createElement('ul');
+    cardContainer.className = 'card-container';
+
+    // Create input for new cards
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.placeholder = 'Add a new card...';
+
+    // Create add card button
+    const addCardButton = document.createElement('button');
+    addCardButton.className = 'add-card';
+    addCardButton.textContent = 'Add Card';
+
+    // Append all elements to the list
+    newList.appendChild(listHeader);
+    newList.appendChild(deleteListButton);
+    newList.appendChild(cardContainer);
+    newList.appendChild(input);
+    newList.appendChild(addCardButton);
+
+    listContainer.appendChild(newList);
+    initializeExistingElements();
+    storeData();
+}
+function addList() {
+    const listName = prompt("Enter the name for the new list:");
+    if (listName === null) return; // User canceled the prompt
+    if (listName.trim() === "") {
+        alert("List name cannot be empty!");
+        return;
+    }
+
+    const newList = document.createElement('li');
+    newList.className = 'list';
+    newList.setAttribute('ondragover', 'allowDrop(event)');
+    newList.setAttribute('ondrop', 'drop(event)');
+    
+    newList.innerHTML = `
+        <div class="list-header">
+            <h3 class="list-title">${listName}</h3>
+            <button class="edit-list-title">Edit</button>
+        </div>
+        <button class="delete-list">Delete List</button>
+        <ul class="card-container"></ul>
+        <input type="text" placeholder="Add a new card...">
+        <button class="add-card">Add Card</button>
+    `;
+
+    listContainer.appendChild(newList);
+    initializeExistingElements();
+    storeData();
+}
+
+function editListTitle(list) {
+    const titleElement = list.querySelector('.list-title');
+    const newTitle = prompt("Enter new list title:", titleElement.textContent);
+    if (newTitle === null) return; // User canceled the prompt
+    if (newTitle.trim() === "") {
+        alert("List title cannot be empty!");
+        return;
+    }
+    titleElement.textContent = newTitle;
+    storeData();
 }
