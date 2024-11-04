@@ -793,3 +793,103 @@ body.dark-mode .edit-card {
 body.dark-mode .edit-card:hover {
     background-color: #27ae60; /* Darker green for hover in dark mode */
 }
+
+/* Add these styles for better mobile responsiveness */
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    .list-container {
+        flex-direction: column;
+    }
+
+    .list {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .nav2 {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav2 li {
+        margin-bottom: 10px;
+    }
+
+    .mode-toggle {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .mode-toggle span {
+        margin: 5px 0;
+    }
+
+    .reset-button {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+/* Existing styles... */
+
+/* Adjust some existing styles for better mobile experience */
+.list {
+    min-width: auto;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 20px;
+}
+
+.card {
+    word-wrap: break-word;
+}
+
+input[type="text"] {
+    font-size: 16px; /* Prevents zooming on mobile when focusing on inputs */
+}
+
+/* Add some touch-friendly sizes for buttons */
+.delete-card,
+.edit-card,
+.add-card,
+.delete-list,
+.edit-list-title {
+    padding: 10px;
+    margin: 5px;
+}
+
+.info-message {
+    position: relative;
+    /* ... existing styles ... */
+}
+
+.close-message {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #721c24;
+}
+
+body.dark-mode .close-message {
+    color: #e74c3c;
+}
+
+/* Existing styles... */
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #007bff; /* Blue line */
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+/* More existing styles... */
