@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website TO-DO LIST</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Website TO-DO LIST</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
 <body>
     <header>
         <nav>
@@ -46,6 +46,10 @@
                 </div>
             </nav>
         </header>
+        <div class="info-message" id="infoMessage">
+            <p>If you encounter any errors or can't edit/delete cards/lists, please press the "Reset All" button to restore normal functionality.</p>
+            <button class="close-message" id="closeMessage">&times;</button>
+        </div>
         <section class="board-container">
             <h2>My Board</h2>
             <button id="resetButton" class="reset-button">Reset All</button>
@@ -53,9 +57,9 @@
                 <!-- To-Do List -->
                 <li class="list" ondragover="allowDrop(event)" ondrop="drop(event)">
                     <div class="list-header">
-    <h3 class="list-title">To-Do</h3>
-    <button class="edit-list-title">Edit</button>
-</div>
+                        <h3 class="list-title">To-Do</h3>
+                        <button class="edit-list-title">Edit</button>
+                    </div>
                     <button class="delete-list">Delete List</button>
                     <ul class="card-container">
                         <li class="card" draggable="true">
@@ -151,4 +155,4 @@
         </div>
     </div>
 </body>
-</html>
+</html> 
