@@ -893,3 +893,53 @@ body.dark-mode .close-message {
 }
 
 /* More existing styles... */
+
+/* Mobile Styles - Vertical */
+@media only screen and (max-width: 600px) {
+    body {
+        flex-direction: column;
+    }
+
+    .list-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .list-container {
+        flex-direction: column;
+    }
+
+    .list {
+        min-width: 100%;
+    }
+
+    .nav ul {
+        flex-direction: column;
+    }
+}
+
+/* Mobile Styles - Horizontal */
+@media only screen and (max-width: 800px) and (orientation: landscape) {
+    body {
+        flex-direction: row;
+    }
+
+    .list-header {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .list-container {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .list {
+        min-width: 45%;
+    }
+
+    .nav ul {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
