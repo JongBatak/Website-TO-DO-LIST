@@ -898,23 +898,26 @@ body.dark-mode .close-message {
 @media only screen and (max-width: 600px) {
     body {
         flex-direction: column;
+        align-items: center;
     }
 
     .list-header {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
     }
 
     .list-container {
         flex-direction: column;
+        align-items: center;
     }
 
     .list {
-        min-width: 100%;
+        width: 100%;
     }
 
     .nav ul {
         flex-direction: column;
+        align-items: center;
     }
 }
 
@@ -922,6 +925,7 @@ body.dark-mode .close-message {
 @media only screen and (max-width: 800px) and (orientation: landscape) {
     body {
         flex-direction: row;
+        align-items: center;
     }
 
     .list-header {
@@ -931,15 +935,18 @@ body.dark-mode .close-message {
 
     .list-container {
         flex-direction: row;
+        align-items: center;
         justify-content: space-around;
     }
 
     .list {
-        min-width: 45%;
+        width: 45%;
     }
 
     .nav ul {
         flex-direction: row;
+        align-items: center;
         justify-content: space-between;
     }
 }
+
