@@ -883,3 +883,40 @@ function editListTitle(list) {
     titleElement.textContent = newTitle;
     storeData();
 }
+
+function setResponsiveDesign() {
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+
+    function handleScreenChange(e) {
+        if (e.matches) {
+            document.querySelectorAll('.list').forEach(list => {
+                list.style.width = '100%';
+                list.style.marginBottom = '20px';
+            });
+
+            document.querySelectorAll('.list-container').forEach(container => {
+                container.style.flexDirection = 'column';
+            });
+
+            document.querySelector('.nav2').style.flexDirection = 'column';
+            document.querySelector('.mode-toggle').style.flexDirection = 'column';
+        } else {
+            document.querySelectorAll('.list').forEach(list => {
+                list.style.width = 'auto';
+                list.style.marginBottom = '0';
+            });
+
+            document.querySelectorAll('.list-container').forEach(container => {
+                container.style.flexDirection = 'row';
+            });
+
+            document.querySelector('.nav2').style.flexDirection = 'row';
+            document.querySelector('.mode-toggle').style.flexDirection = 'row';
+        }
+    }
+
+    mediaQuery.addListener(handleScreenChange);
+    handleScreenChange(mediaQuery);
+}
+
+document.addEventListener('DOMContentLoaded', setResponsiveDesign);
